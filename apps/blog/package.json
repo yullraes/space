@@ -1,0 +1,22 @@
+{
+  "name": "@my-blog/blog",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter @my-blog/schema build && astro dev --host 0.0.0.0",
+    "build": "pnpm --filter @my-blog/schema build && astro build",
+    "check": "pnpm --filter @my-blog/schema build && astro check",
+    "preview": "astro preview --host 0.0.0.0"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.6",
+    "@astrojs/rss": "^4.0.12",
+    "@astrojs/sitemap": "^3.6.0",
+    "@my-blog/schema": "workspace:*",
+    "astro": "^5.16.6"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4"
+  }
+}

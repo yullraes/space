@@ -1,0 +1,48 @@
+---
+import "../styles/global.css";
+import { getPostPath, getPublishedPosts } from "../lib/posts";
+
+const posts = await getPublishedPosts();
+---
+
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>My Blog</title>
+    <meta
+      name="description"
+      content="Questions, judgment, and notes from building software."
+    />
+  </head>
+  <body>
+    <main class="page">
+      <header class="site-header">
+        <h1>My Blog</h1>
+        <p>Questions, judgment, and notes from building software.</p>
+      </header>
+
+      <section class="post-list" aria-label="posts">
+        {
+          posts.map((post) => (
+            <article class="post-card">
+              <h2>
+                <a href={getPostPath(post)}>{post.data.title}</a>
+              </h2>
+              <p class="post-description">{post.data.description}</p>
+              {post.data.question && (
+                <p class="question">
+                  <span class="question-label">Question</span>
+                  {post.data.question}
+                </p>
+              )}
+              <p class="post-meta">
+                {post.data.category} · {post.data.publishedAt}
+              </p>
+            </article>
+          ))
+        }
+      </section>
+    </main>
+  </body>
+</html>

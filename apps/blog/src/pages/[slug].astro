@@ -1,0 +1,57 @@
+---
+import "../styles/global.css";
+import { render } from "astro:content";
+import { getPostMarkdownPath, getPostPath, getPublishedPosts } from "../lib/posts";
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+
+  return posts.map((post) => ({
+    params: { slug: post.data.slug },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const canonicalPath = getPostPath(post);
+---
+
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{post.data.seo?.title ?? post.data.title}</title>
+    <meta
+      name="description"
+      content={post.data.seo?.description ?? post.data.description}
+    />
+    <link rel="canonical" href={canonicalPath} />
+  </head>
+  <body>
+    <main class="page article">
+      <article>
+        <header class="article-header">
+          <p class="post-meta">
+            {post.data.category} · {post.data.publishedAt}
+          </p>
+          <h1>{post.data.title}</h1>
+          {
+            post.data.question && (
+              <p class="question">
+                <span class="question-label">Question</span>
+                {post.data.question}
+              </p>
+            )
+          }
+          <p class="post-description">{post.data.description}</p>
+          <p class="post-meta">
+            <a href={getPostMarkdownPath(post)}>Markdown</a>
+          </p>
+        </header>
+
+        <Content />
+      </article>
+    </main>
+  </body>
+</html>

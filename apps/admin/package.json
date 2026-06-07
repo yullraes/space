@@ -1,0 +1,21 @@
+{
+  "name": "@my-blog/admin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter @my-blog/api-client build && vite --host 0.0.0.0",
+    "build": "pnpm --filter @my-blog/api-client build && vue-tsc -p tsconfig.app.json --noEmit && vite build",
+    "check": "pnpm --filter @my-blog/api-client build && vue-tsc -p tsconfig.app.json --noEmit",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "dependencies": {
+    "@my-blog/api-client": "workspace:*",
+    "vue": "^3.5.24"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.2",
+    "vite": "^7.2.6",
+    "vue-tsc": "^3.1.8"
+  }
+}
