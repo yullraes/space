@@ -1,6 +1,10 @@
 ---
 import "../styles/global.css";
 import { render } from "astro:content";
+import ArticleBody from "../components/ArticleBody.astro";
+import ArticleFooter from "../components/ArticleFooter.astro";
+import ArticleHeader from "../components/ArticleHeader.astro";
+import JournalFooter from "../components/JournalFooter.astro";
 import { getPostMarkdownPath, getPostPath, getPublishedPosts } from "../lib/posts";
 
 export async function getStaticPaths() {
@@ -15,6 +19,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const canonicalPath = getPostPath(post);
+const markdownPath = getPostMarkdownPath(post);
 ---
 
 <html lang="ko">
@@ -28,30 +33,29 @@ const canonicalPath = getPostPath(post);
     />
     <link rel="canonical" href={canonicalPath} />
   </head>
-  <body>
-    <main class="page article">
-      <article>
-        <header class="article-header">
-          <p class="post-meta">
-            {post.data.category} · {post.data.publishedAt}
-          </p>
-          <h1>{post.data.title}</h1>
-          {
-            post.data.question && (
-              <p class="question">
-                <span class="question-label">Question</span>
-                {post.data.question}
-              </p>
-            )
-          }
-          <p class="post-description">{post.data.description}</p>
-          <p class="post-meta">
-            <a href={getPostMarkdownPath(post)}>Markdown</a>
-          </p>
-        </header>
+  <body class="site-shell">
+    <main class="journal-main article-main">
+      <article class="article-detail" aria-labelledby="article-title">
+        <ArticleHeader post={post} titleId="article-title" />
 
-        <Content />
+        <ArticleBody>
+          <Content />
+        </ArticleBody>
+
+        <ArticleFooter markdownPath={markdownPath} tags={post.data.tags} />
       </article>
     </main>
+
+    <JournalFooter />
   </body>
 </html>
+
+<style>
+  .article-main {
+    padding-top: 64px;
+  }
+
+  .article-detail {
+    width: 100%;
+  }
+</style>

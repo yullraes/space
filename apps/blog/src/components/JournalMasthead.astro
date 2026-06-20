@@ -1,0 +1,41 @@
+---
+interface Props {
+  title: string;
+  titleId: string;
+}
+
+const { title, titleId } = Astro.props;
+---
+
+<header class="journal-masthead">
+  <div class="journal-masthead__content">
+    <h1 id={titleId}>{title}</h1>
+  </div>
+</header>
+
+<style>
+  .journal-masthead {
+    margin-bottom: 48px;
+    border-bottom: 3px solid var(--color-primary);
+    padding-bottom: 24px;
+  }
+
+  .journal-masthead__content {
+    width: 100%;
+  }
+
+  .journal-masthead h1 {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: clamp(3rem, 14vw, 4rem);
+    font-weight: 800;
+    line-height: 0.98;
+    letter-spacing: 0;
+  }
+
+  @media (max-width: 640px) {
+    .journal-masthead {
+      margin-bottom: 48px;
+    }
+  }
+</style>

@@ -1,0 +1,142 @@
+---
+import { formatPublishedDate } from "../lib/date";
+import { getPostPath, type PostEntry } from "../lib/posts";
+
+interface Props {
+  post: PostEntry;
+}
+
+const { post } = Astro.props;
+---
+
+<article class="post-preview">
+  <div class="post-preview__content">
+    <header class="post-preview__header">
+      <p class="post-preview__meta">
+        <time datetime={post.data.publishedAt}>
+          {formatPublishedDate(post.data.publishedAt)}
+        </time>
+        <span class="post-preview__meta-separator" aria-hidden="true"></span>
+        <span>{post.data.category}</span>
+      </p>
+
+      <h2 class="post-preview__title">
+        <a href={getPostPath(post)}>{post.data.title}</a>
+      </h2>
+    </header>
+
+    <p class="post-preview__summary">{post.data.description}</p>
+
+    {post.data.tags.length > 0 && (
+      <footer class="post-preview__footer">
+        <ul class="post-preview__tags" aria-label={`${post.data.title} 태그`}>
+          {post.data.tags.map((tag) => (
+            <li>{tag}</li>
+          ))}
+        </ul>
+      </footer>
+    )}
+  </div>
+</article>
+
+<style>
+  .post-preview {
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--color-border-muted);
+  }
+
+  .post-preview__content {
+    display: grid;
+    width: 100%;
+  }
+
+  .post-preview__header {
+    display: grid;
+    gap: 16px;
+  }
+
+  .post-preview__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    color: var(--color-secondary);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.55;
+    letter-spacing: 0;
+  }
+
+  .post-preview__meta-separator {
+    width: 3px;
+    height: 3px;
+    border-radius: 999px;
+    background: currentColor;
+  }
+
+  .post-preview__title {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: 1.75rem;
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: 0;
+  }
+
+  .post-preview__title a {
+    text-decoration: none;
+    transition: color 180ms cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .post-preview__title a:hover,
+  .post-preview__title a:focus-visible {
+    color: var(--color-tertiary);
+  }
+
+  .post-preview__title a:focus-visible {
+    outline: 2px solid var(--color-tertiary);
+    outline-offset: 4px;
+  }
+
+  .post-preview__summary {
+    max-width: 640px;
+    margin: 16px 0 0;
+    color: var(--color-secondary);
+    line-height: 1.75;
+  }
+
+  .post-preview__footer {
+    margin-top: 24px;
+  }
+
+  .post-preview__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .post-preview__tags li {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border-muted);
+    border-radius: 999px;
+    padding: 4px 12px;
+    background: var(--color-surface-muted);
+    color: var(--color-secondary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  @media (max-width: 640px) {
+    .post-preview__title {
+      font-size: 1.5rem;
+      line-height: 1.22;
+    }
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+import LayoutContainer from "./LayoutContainer.astro";
+---
+
+<section class="article-body" aria-label="본문">
+  <LayoutContainer>
+    <div class="article-body__content">
+      <slot />
+    </div>
+  </LayoutContainer>
+</section>
+
+<style>
+  .article-body__content {
+    color: var(--color-primary);
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+
+  .article-body__content :global(*) {
+    margin-block: 0;
+  }
+
+  .article-body__content :global(* + *) {
+    margin-top: 24px;
+  }
+
+  .article-body__content :global(h2) {
+    margin-top: 64px;
+    border-bottom: 2px solid var(--color-border-muted);
+    padding-bottom: 12px;
+    color: var(--color-primary);
+    font-size: 1.75rem;
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: 0;
+  }
+
+  .article-body__content :global(h3) {
+    margin-top: 48px;
+    color: var(--color-primary);
+    font-size: 1.375rem;
+    font-weight: 750;
+    line-height: 1.28;
+    letter-spacing: 0;
+  }
+
+  .article-body__content :global(p),
+  .article-body__content :global(li) {
+    color: #444748;
+  }
+
+  .article-body__content :global(a) {
+    color: var(--color-tertiary);
+  }
+
+  .article-body__content :global(ul),
+  .article-body__content :global(ol) {
+    padding-left: 1.25rem;
+  }
+
+  .article-body__content :global(li + li) {
+    margin-top: 12px;
+  }
+
+  .article-body__content :global(blockquote) {
+    margin-inline: 0;
+    border-left: 3px solid var(--color-primary);
+    padding: 16px 0 16px 20px;
+    color: var(--color-secondary);
+  }
+
+  @media (max-width: 640px) {
+    .article-body__content :global(h2) {
+      margin-top: 48px;
+      font-size: 1.5rem;
+      line-height: 1.22;
+    }
+  }
+</style>

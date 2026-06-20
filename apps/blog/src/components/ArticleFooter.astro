@@ -1,0 +1,88 @@
+---
+import LayoutContainer from "./LayoutContainer.astro";
+
+interface Props {
+  markdownPath: string;
+  tags: string[];
+}
+
+const { markdownPath, tags } = Astro.props;
+---
+
+<footer class="article-footer">
+  <LayoutContainer>
+    <div class="article-footer__content">
+      {tags.length > 0 && (
+        <ul class="article-footer__tags" aria-label="글 태그">
+          {tags.map((tag) => (
+            <li>{tag}</li>
+          ))}
+        </ul>
+      )}
+
+      <a class="article-footer__markdown" href={markdownPath}>Markdown</a>
+    </div>
+  </LayoutContainer>
+</footer>
+
+<style>
+  .article-footer {
+    margin-top: 64px;
+  }
+
+  .article-footer__content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    border-top: 2px solid var(--color-primary);
+    padding-top: 32px;
+  }
+
+  .article-footer__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .article-footer__tags li {
+    border: 1px solid var(--color-border-muted);
+    border-radius: 999px;
+    padding: 6px 12px;
+    background: var(--color-surface-muted);
+    color: var(--color-secondary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .article-footer__markdown {
+    color: var(--color-secondary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  .article-footer__markdown:hover,
+  .article-footer__markdown:focus-visible {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .article-footer__markdown:focus-visible {
+    outline: 2px solid var(--color-tertiary);
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 640px) {
+    .article-footer__content {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

@@ -4,17 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "pnpm --filter @my-blog/schema build && tsx watch src/index.ts",
+    "dev": "tsx watch src/index.ts",
     "build": "tsc -p tsconfig.json",
     "check": "tsc -p tsconfig.json --noEmit",
     "start": "node dist/index.js"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.7",
-    "@hono/zod-validator": "^0.7.5",
-    "@my-blog/schema": "workspace:*",
-    "hono": "^4.10.7",
-    "zod": "^3.25.76"
+    "hono": "^4.10.7"
   },
   "devDependencies": {
     "@types/node": "^24.10.2",

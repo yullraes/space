@@ -1,0 +1,27 @@
+---
+interface Props {
+  variant?: "content" | "wide";
+}
+
+const { variant = "content" } = Astro.props;
+---
+
+<div class:list={["layout-container", `layout-container--${variant}`]}>
+  <slot />
+</div>
+
+<style>
+  .layout-container {
+    box-sizing: border-box;
+    width: min(var(--container-width), calc(100vw - (var(--gutter) * 2)));
+    margin-inline: auto;
+  }
+
+  .layout-container--content {
+    --container-width: var(--content-width);
+  }
+
+  .layout-container--wide {
+    --container-width: var(--wide-width);
+  }
+</style>

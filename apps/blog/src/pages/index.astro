@@ -1,6 +1,10 @@
 ---
 import "../styles/global.css";
-import { getPostPath, getPublishedPosts } from "../lib/posts";
+import JournalFooter from "../components/JournalFooter.astro";
+import JournalMasthead from "../components/JournalMasthead.astro";
+import LayoutContainer from "../components/LayoutContainer.astro";
+import PostPreview from "../components/PostPreview.astro";
+import { getPublishedPosts } from "../lib/posts";
 
 const posts = await getPublishedPosts();
 ---
@@ -9,40 +13,75 @@ const posts = await getPublishedPosts();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>My Blog</title>
+    <title>기록 | DevJournal</title>
     <meta
       name="description"
-      content="Questions, judgment, and notes from building software."
+      content="소프트웨어를 만들며 남긴 구현 기록, 판단 과정, 기술 노트."
     />
   </head>
-  <body>
-    <main class="page">
-      <header class="site-header">
-        <h1>My Blog</h1>
-        <p>Questions, judgment, and notes from building software.</p>
-      </header>
+  <body class="site-shell">
+    <main class="journal-main" aria-labelledby="journal-title">
+      <LayoutContainer>
+        <JournalMasthead title="기록" titleId="journal-title" />
 
-      <section class="post-list" aria-label="posts">
-        {
-          posts.map((post) => (
-            <article class="post-card">
-              <h2>
-                <a href={getPostPath(post)}>{post.data.title}</a>
-              </h2>
-              <p class="post-description">{post.data.description}</p>
-              {post.data.question && (
-                <p class="question">
-                  <span class="question-label">Question</span>
-                  {post.data.question}
-                </p>
-              )}
-              <p class="post-meta">
-                {post.data.category} · {post.data.publishedAt}
-              </p>
-            </article>
-          ))
-        }
-      </section>
+        <section class="post-index" aria-labelledby="post-index-title">
+          <div class="post-index__content">
+            <h2 id="post-index-title" class="visually-hidden">글 목록</h2>
+
+            {posts.length > 0 ? (
+              <ol class="post-index__list">
+                {posts.map((post) => (
+                  <li class="post-index__item">
+                    <PostPreview post={post} />
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <p class="post-index__empty">아직 발행된 글이 없습니다.</p>
+            )}
+          </div>
+        </section>
+      </LayoutContainer>
     </main>
+
+    <JournalFooter />
   </body>
 </html>
+
+<style>
+  .post-index {
+    margin: 0;
+  }
+
+  .post-index__content {
+    width: 100%;
+  }
+
+  .post-index__list {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .post-index__item:last-child :global(.post-preview) {
+    border-bottom: 0;
+  }
+
+  .post-index__empty {
+    border-top: 1px solid var(--color-border-muted);
+    border-bottom: 1px solid var(--color-border-muted);
+    margin: 0;
+    padding: 32px 0;
+    color: var(--color-secondary);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 640px) {
+    .post-index__list {
+      gap: 48px;
+    }
+  }
+</style>

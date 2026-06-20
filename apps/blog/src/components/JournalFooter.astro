@@ -1,0 +1,89 @@
+---
+import LayoutContainer from "./LayoutContainer.astro";
+---
+
+<footer class="journal-footer">
+  <LayoutContainer variant="wide">
+    <div class="journal-footer__content">
+      <div class="journal-footer__brand">
+        <p class="journal-footer__title">DevJournal</p>
+        <p class="journal-footer__note">Built for mechanical precision.</p>
+      </div>
+
+      <nav class="journal-footer__links" aria-label="보조 링크">
+        <a href="/rss.xml">RSS</a>
+        <a href="/llms.txt">LLMS</a>
+      </nav>
+    </div>
+  </LayoutContainer>
+</footer>
+
+<style>
+  .journal-footer {
+    border-top: 2px solid var(--color-primary);
+    background: var(--color-surface-muted);
+  }
+
+  .journal-footer__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 48px 0;
+  }
+
+  .journal-footer__title,
+  .journal-footer__note {
+    margin: 0;
+  }
+
+  .journal-footer__title {
+    font-size: 1.375rem;
+    font-weight: 750;
+    line-height: 1.28;
+  }
+
+  .journal-footer__note {
+    margin-top: 8px;
+    color: var(--color-secondary);
+    font-size: 0.875rem;
+    line-height: 1.55;
+  }
+
+  .journal-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 24px;
+  }
+
+  .journal-footer__links a {
+    color: var(--color-secondary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  .journal-footer__links a:hover,
+  .journal-footer__links a:focus-visible {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .journal-footer__links a:focus-visible {
+    outline: 2px solid var(--color-tertiary);
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 640px) {
+    .journal-footer__content {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .journal-footer__links {
+      justify-content: flex-start;
+    }
+  }
+</style>
