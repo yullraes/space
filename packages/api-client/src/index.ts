@@ -1,4 +1,4 @@
-import type { PostMeta, PostStatus } from "@my-blog/schema";
+import type { PostMeta, PostStatus } from "@my-blog/blog-contract";
 
 type FetchLike = (
   input: RequestInfo | URL,

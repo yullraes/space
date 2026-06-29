@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      turbo:
+        specifier: ^2.10.0
+        version: 2.10.0
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -58,9 +61,9 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.6.0
         version: 3.7.3
-      '@my-blog/schema':
+      '@my-blog/blog-contract':
         specifier: workspace:*
-        version: link:../../packages/schema
+        version: link:../../packages/blog-contract
       astro:
         specifier: ^5.16.6
         version: 5.18.2(@types/node@24.13.1)(rollup@4.61.1)(tsx@4.22.4)(typescript@5.9.3)(yaml@2.9.0)
@@ -71,11 +74,11 @@ importers:
 
   packages/api-client:
     dependencies:
-      '@my-blog/schema':
+      '@my-blog/blog-contract':
         specifier: workspace:*
-        version: link:../schema
+        version: link:../blog-contract
 
-  packages/schema:
+  packages/blog-contract:
     dependencies:
       zod:
         specifier: ^3.25.76
@@ -987,6 +990,36 @@ packages:
 
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
+
+  '@turbo/darwin-64@2.10.0':
+    resolution: {integrity: sha512-EwvHThXzpY0KGd1/NAmuewI5D+aVa3Rl/OlxE36yfjUKb/+ySrfJrSlEFt8aD1OXwnnaHnQnPKHFndor0Zxlsg==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@turbo/darwin-arm64@2.10.0':
+    resolution: {integrity: sha512-9d2fTyyG0lf5Wq1bwJA9qUaeecViMkLcdctWaMMmCkxZ/JqypmqOwK3W6vmejeKVgkr06gSoiX8bD+xN5Jpxcg==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@turbo/linux-64@2.10.0':
+    resolution: {integrity: sha512-sZBtjMuufitanjzi6UssoUpJMnnPlLMcdcJj3m3ptNsSq31Xh7MnjhwA5nWvLDTfEFg8GPcbYFXMo8vSdKRfqQ==}
+    cpu: [x64]
+    os: [linux]
+
+  '@turbo/linux-arm64@2.10.0':
+    resolution: {integrity: sha512-vkq/Z8R+1DQ+kifWFa810IjRy2NNBVvha3cg9sWA3nFh6nnGrHSMnnJKrzH7c/No9kq4Jb55Ru44YKsCSBgrKg==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@turbo/windows-64@2.10.0':
+    resolution: {integrity: sha512-CRUEguLWxFQHptYZS7HjPhNhAFawfea07iR+xAQ5e4klgLrPCMdexBkXwSCwOxqTFknJ7RZFN3gOaADsw+Gttg==}
+    cpu: [x64]
+    os: [win32]
+
+  '@turbo/windows-arm64@2.10.0':
+    resolution: {integrity: sha512-dVHGaf9F8twzgibcBqKoADT/LLqf9++jDb+hq/LPWWaOmRpp4M+/pVOm7vy4z9D++xg8eaxWLT0+wQxFwhYu9A==}
+    cpu: [arm64]
+    os: [win32]
 
   '@types/debug@4.1.13':
     resolution: {integrity: sha512-KSVgmQmzMwPlmtljOomayoR89W4FynCAi3E8PPs7vmDVPe84hT+vGPKkJfThkmXs0x0jAaa9U8uW8bbfyS2fWw==}
@@ -2093,6 +2126,10 @@ packages:
     engines: {node: '>=18.0.0'}
     hasBin: true
 
+  turbo@2.10.0:
+    resolution: {integrity: sha512-o016H9PPtuH2deb3mh3Vci3Avfi9UYgM/RONQisY7HnloupP0IFSbFS3gFYJgFJP8nwBrByHWFQIDa8T2zIXPw==}
+    hasBin: true
+
   type-fest@4.41.0:
     resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
     engines: {node: '>=16'}
@@ -3167,6 +3204,24 @@ snapshots:
       '@types/hast': 3.0.4
 
   '@shikijs/vscode-textmate@10.0.2': {}
+
+  '@turbo/darwin-64@2.10.0':
+    optional: true
+
+  '@turbo/darwin-arm64@2.10.0':
+    optional: true
+
+  '@turbo/linux-64@2.10.0':
+    optional: true
+
+  '@turbo/linux-arm64@2.10.0':
+    optional: true
+
+  '@turbo/windows-64@2.10.0':
+    optional: true
+
+  '@turbo/windows-arm64@2.10.0':
+    optional: true
 
   '@types/debug@4.1.13':
     dependencies:
@@ -4912,6 +4967,15 @@ snapshots:
       esbuild: 0.28.0
     optionalDependencies:
       fsevents: 2.3.3
+
+  turbo@2.10.0:
+    optionalDependencies:
+      '@turbo/darwin-64': 2.10.0
+      '@turbo/darwin-arm64': 2.10.0
+      '@turbo/linux-64': 2.10.0
+      '@turbo/linux-arm64': 2.10.0
+      '@turbo/windows-64': 2.10.0
+      '@turbo/windows-arm64': 2.10.0
 
   type-fest@4.41.0: {}
 

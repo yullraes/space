@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "pnpm --filter @my-blog/api-client build && vite --host 0.0.0.0",
-    "build": "pnpm --filter @my-blog/api-client build && vue-tsc -p tsconfig.app.json --noEmit && vite build",
-    "check": "pnpm --filter @my-blog/api-client build && vue-tsc -p tsconfig.app.json --noEmit",
+    "dev": "vite --host 0.0.0.0",
+    "build": "vue-tsc -p tsconfig.app.json --noEmit && vite build",
+    "check": "vue-tsc -p tsconfig.app.json --noEmit",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {

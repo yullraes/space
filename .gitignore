@@ -37,9 +37,13 @@ pnpm-debug.log*
 .vscode/
 .DS_Store
 Thumbs.db
+Desktop.ini
 
 # Local Codex runtime
 .codex-run/
 
 # Local planning docs
-docs/
+docs/*
+!docs/tech-stack.md
+!docs/adr/
+!docs/adr/*.md

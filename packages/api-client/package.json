@@ -16,6 +16,6 @@
     "check": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@my-blog/schema": "workspace:*"
+    "@my-blog/blog-contract": "workspace:*"
   }
 }

@@ -1,3 +1,8 @@
+---
+contract_scope: boundary
+name: blog
+---
+
 # Blog App
 
 This app is the public renderer for the blog.

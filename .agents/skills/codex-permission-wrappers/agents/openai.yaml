@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Permission Wrappers"
+  short_description: "Maintain Codex permission wrapper scripts"
+  default_prompt: "Use $codex-permission-wrappers to update Codex permission wrapper scripts."
