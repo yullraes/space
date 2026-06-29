@@ -14,9 +14,7 @@
     "check": "pnpm check:adr && turbo run check",
     "check:adr": "node scripts/validate-adr.mjs",
     "scan:boundaries": "node .codex/tools/contract-boundary-permissions/scripts/scan-boundaries.mjs",
-    "refresh:generated": "node .codex/tools/contract-boundary-permissions/scripts/refresh-generated.mjs",
-    "generate:permissions": "node .codex/tools/contract-boundary-permissions/src/generate-codex-permissions.ts",
-    "validate:permissions": "node .codex/tools/contract-boundary-permissions/src/validate-codex-permissions.ts"
+    "refresh:generated": "node .codex/tools/contract-boundary-permissions/scripts/refresh-generated.mjs"
   },
   "devDependencies": {
     "turbo": "^2.10.0",
