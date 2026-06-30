@@ -1,57 +1,47 @@
-# My Blog
+# Space
 
-Git-based MDX publishing system for a personal blog.
+개인 코드 관리를 위한 모노레포입니다.
 
-This repository is organized around a small publishing workflow:
+Space는 하나의 블로그 프로젝트가 아닙니다. 제가 소유하고 유지하며
+계속 발전시킬 코드들을 한곳에서 관리하기 위한 작업 공간입니다. 앱,
+패키지, 문서, 도구, 실험 코드는 각각 독립된 셀로 두되 하나의 저장소,
+하나의 의존성 그래프, 하나의 엔지니어링 규칙을 공유합니다.
 
-- write posts as MDX files in git
-- edit and operate the blog through an admin UI
-- execute admin actions through command-shaped API calls
-- build the public blog as static output
-- deploy the generated output to a home server
+현재 들어 있는 블로그 관련 코드는 이 모노레포 안의 제품 영역 중
+하나입니다. 저장소의 이름이나 앞으로의 방향을 블로그에 묶어 두지
+않습니다.
 
-Current source code is placeholder scaffolding only. Use the README files as the
-architecture guide while the implementation is still being shaped.
+## 프로젝트 맵
 
-## Project Map
+- [Apps](./apps/README.md): 배포 가능한 런타임 셸과 조립 지점입니다.
+- `packages`: 재사용 코드 또는 제품별 코드 경계를 나누어 둔 공간입니다.
+- `docs`: 계획, 아키텍처 기록, 기술적 의사결정을 남기는 공간입니다.
+- `scripts`: 저장소 자동화와 로컬 유지보수 스크립트를 두는 공간입니다.
 
-- [Apps](./apps/README.md): deployable runtime shells and composition roots.
-- `packages`: owned code cells separated by product, platform, base, contract,
-  and adapter boundaries.
-- `docs`: local planning notes and technical decision records.
+## 모노레포 경계
 
-## Boundaries
+앱은 런타임 진입점입니다. 패키지를 조립하고, 런타임 설정을 읽고,
+프레임워크에 맞는 셸을 노출하는 역할을 맡습니다.
 
-- `apps/blog` starts and composes the public Astro/MDX blog renderer.
-- `apps/admin` starts and composes the editor and operations UI.
-- `apps/api` starts the admin HTTP runtime and mounts package-owned command
-  adapters.
-- `packages` own product logic, domain rules, policies, ports, contracts,
-  adapters, and concrete implementations.
+패키지는 구현 경계를 소유합니다. 제품 로직, 계약, 어댑터, 정책,
+워크플로, 플랫폼 기능은 앱 안에 묻히지 않고 패키지에 위치해야 합니다.
 
-Apps should not become the place where product behavior is implemented. They
-wire runtime config, framework entry points, and package implementations, then
-delegate the actual work to packages.
+문서는 보존할 가치가 있는 결정을 기록합니다. 특정 제품 영역에 대한
+문서일 수도 있고, 저장소 전체 규칙이나 앞으로의 작업에 대한 기록일 수도
+있습니다.
 
-Apps should not own domain contracts, validate product DTOs, execute workflows,
-or make product policy decisions. Those responsibilities belong to product
-contract, adapter, workflow, and core packages.
+## 현재 작업 공간
 
-The public blog should not be rendered by the API. The API should not become a
-RESTful public resource server. It is closer to an RPC command gateway for
-editor and operations workflows, but the gateway behavior itself is provided by
-packages and mounted by `apps/api`.
+현재 이 저장소에는 초기 스캐폴딩으로 다음 영역이 들어 있습니다.
 
-## Content Model
+- 공개 블로그 렌더러
+- 관리자 UI
+- API 런타임
+- 계약과 API 접근을 위한 공유 패키지
 
-Posts are git-based MDX bundles. A post is expected to live as a directory that
-contains an `index.mdx` file plus any static files used by that post.
+이들은 Space 안의 구현 셀일 뿐, Space 전체의 목적은 아닙니다.
 
-The public blog consumes publishable content and builds static output. Editing,
-workflow commands, git operations, and deployment orchestration happen outside
-the public renderer.
-
-## Commands
+## 명령어
 
 ```bash
 pnpm install
